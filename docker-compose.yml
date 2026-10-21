@@ -1,0 +1,47 @@
+version: '3.8'
+
+services:
+  api:
+    build: .
+    container_name: nexora-api
+    ports:
+      - "8000:8000"
+    environment:
+      - GEMINI_API_KEY=${GEMINI_API_KEY:-your_gemini_api_key_here}
+      - GEMINI_MODEL=${GEMINI_MODEL:-gemini-2.5-flash}
+      - JWT_SECRET=${JWT_SECRET:-super-secret-jwt-key-change-in-production}
+      - JWT_EXPIRE_MINUTES=${JWT_EXPIRE_MINUTES:-60}
+      - EMBEDDING_MODEL=BAAI/bge-small-en-v1.5
+      - QDRANT_PATH=./qdrant_data
+      - DATA_DIR=./data
+      - DEMO_PASSWORD=nexora123
+      - DEMO_MODE=true
+    volumes:
+      - qdrant_storage:/app/qdrant_data
+      - sqlite_data:/app/data_storage
+    command: >
+      sh -c "python scripts/seed_users.py &&
+             python -m app.ingestion &&
+             uvicorn app.main:app --host 0.0.0.0 --port 8000"
+    healthcheck:
+      test: ["CMD", "curl", "-f", "http://localhost:8000/health"]
+      interval: 10s
+      timeout: 5s
+      retries: 5
+
+  ui:
+    build: .
+    container_name: nexora-ui
+    ports:
+      - "8501:8501"
+    environment:
+      - API_URL=http://api:8000
+    depends_on:
+      api:
+        condition: service_healthy
+    command: >
+      streamlit run ui/streamlit_app.py --server.port=8501 --server.address=0.0.0.0
+
+volumes:
+  qdrant_storage:
+  sqlite_data:

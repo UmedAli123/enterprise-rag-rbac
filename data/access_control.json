@@ -1,0 +1,11 @@
+{
+  "access_levels": ["public", "hr", "finance", "engineering", "executive"],
+  "roles": {
+    "employee":        ["public"],
+    "engineer":        ["public", "engineering"],
+    "finance_analyst": ["public", "finance"],
+    "hr_manager":      ["public", "hr"],
+    "cfo":             ["public", "finance", "executive"],
+    "admin":           ["public", "hr", "finance", "engineering", "executive"]
+  }
+}

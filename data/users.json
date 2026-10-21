@@ -1,0 +1,8 @@
+[
+  {"username": "emma.employee", "name": "Emma Clarke",   "role": "employee",        "department": "Marketing"},
+  {"username": "ethan.engineer", "name": "Ethan Brooks", "role": "engineer",        "department": "Engineering"},
+  {"username": "fiona.finance", "name": "Fiona Reyes",   "role": "finance_analyst", "department": "Finance"},
+  {"username": "harry.hr",      "name": "Harry Singh",   "role": "hr_manager",      "department": "People Operations"},
+  {"username": "carla.cfo",     "name": "Carla Moretti", "role": "cfo",             "department": "Finance"},
+  {"username": "adam.admin",    "name": "Adam Okafor",   "role": "admin",           "department": "IT"}
+]

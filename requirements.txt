@@ -1,0 +1,16 @@
+fastapi
+uvicorn
+pydantic-settings
+python-dotenv
+qdrant-client
+sentence-transformers
+langchain
+langchain-google-genai
+pyjwt
+bcrypt
+python-frontmatter
+pytest
+httpx
+streamlit
+ragas
+pandas
